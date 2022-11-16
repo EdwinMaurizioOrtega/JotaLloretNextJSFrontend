@@ -3,7 +3,7 @@
     "version": "8.0.1-SNAPSHOT",
     "private": false,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev -p 80",
         "build": "next build",
         "start": "next start",
         "export": "next build && next export",
