@@ -9,7 +9,7 @@ import AppConfig from '../../layout/AppConfig';
 import {LayoutContext} from '../../layout/context/layoutcontext';
 import {InputText} from "primereact/inputtext";
 import {Checkbox} from "primereact/checkbox";
-import {OrganizationChart} from "primereact/organizationchart";
+
 
 const LandingPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -17,9 +17,11 @@ const LandingPage = () => {
     const menuRef = useRef();
 
     const [cedula, setCedula] = useState('');
+    // console.log(cedula);
     const [telefono, setTelefono] = useState('');
 
     const [octavo1, setOctavo1] = useState('');
+    // console.log(octavo1);
     const [octavo2, setOctavo2] = useState('');
     const [octavo3, setOctavo3] = useState('');
     const [octavo4, setOctavo4] = useState('');
@@ -40,40 +42,48 @@ const LandingPage = () => {
 
     const [checked, setChecked] = useState(false);
 
+    async function postData() {
+        var axios = require('axios');
+        var data = JSON.stringify({
+            "fechaCreacion": "16-11-2022",
+            "cedula": cedula,
+            "telefono": telefono,
+            "octavo1": octavo1,
+            "octavo2": octavo2,
+            "octavo3": octavo3,
+            "octavo4": octavo4,
+            "octavo5": octavo5,
+            "octavo6": octavo6,
+            "octavo7": octavo7,
+            "octavo8": octavo8,
+            "cuarto1": cuarto1,
+            "cuarto2": cuarto2,
+            "cuarto3": cuarto3,
+            "cuarto4": cuarto4,
+            "semifinal1": semifinal1,
+            "semifinal2": semifinal2,
+            "finalfinal": final,
+            "tc": checked
+        });
 
-    const [selection, setSelection] = useState([]);
-    const data2 = [{
-        label: 'F.C Barcelona',
-        expanded: true,
-        children: [
-            {
-                label: 'F.C Barcelona',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Chelsea FC'
-                    },
-                    {
-                        label: 'F.C. Barcelona'
-                    }
-                ]
+        var config = {
+            method: 'post',
+            url: 'http://localhost:8080/api/pollas',
+            headers: {
+                'Content-Type': 'application/json'
             },
-            {
-                label: 'Real Madrid',
-                expanded: true,
-                children: [
-                    {
-                        label: 'Bayern Munich'
-                    },
-                    {
-                        label: 'Real Madrid'
-                    }
-                ]
-            }
-        ]
-    }];
+            data : data
+        };
 
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
+    }
 
     return (
         <div className="surface-0 flex justify-content-center">
@@ -138,53 +148,53 @@ const LandingPage = () => {
                     </div>
 
                 </div>
-                <div id="features" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+                <div id="features_uno" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
                     <div className="justify-content-center">
                         <h5>CÉDULA</h5>
-                        <InputText value={cedula} onChange={(e) => setValue1(e.target.value)}/>
+                        <InputText value={cedula} onChange={(e) => setCedula(e.target.value)}/>
                         <br></br>
                         <h5>TELÉFONO</h5>
-                        <InputText value={telefono} onChange={(e) => setValue1(e.target.value)}/>
+                        <InputText value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
 
                     </div>
 
                 </div>
 
-                <div id="features" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+                <div id="features_dos" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
 
                     <div className="grid justify-content-center">
 
 
-                        <div class="organizational-chart">
+                        <div className="organizational-chart">
 
 
                             <ul>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/></li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={cuarto1} onChange={(e) => setCuarto1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={cuarto2} onChange={(e) => setCuarto2(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={cuarto3} onChange={(e) => setCuarto3(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={cuarto4} onChange={(e) => setCuarto4(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto1} onChange={(e) => setCuarto1(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto2} onChange={(e) => setCuarto2(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto3} onChange={(e) => setCuarto3(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto4} onChange={(e) => setCuarto4(e.target.value)}/></li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={semifinal1} onChange={(e) => setSemiFinal1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={semifinal2} onChange={(e) => setSemifinal2(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={semifinal1} onChange={(e) => setSemiFinal1(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={semifinal2} onChange={(e) => setSemifinal2(e.target.value)}/></li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height:"20px"}} value={final} onChange={(e) => setFinal(e.target.value)}/></li>
+                                <li><InputText style={{width: "100px", height: "20px"}} value={final} onChange={(e) => setFinal(e.target.value)}/></li>
                             </ul>
                         </div>
 
@@ -192,16 +202,16 @@ const LandingPage = () => {
                     </div>
                 </div>
 
-                <div id="features" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+                <div id="features_tres" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
                     <div className="justify-content-center">
 
                         <div className="field-checkbox">
-                            <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)} />
+                            <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)}/>
                             <label htmlFor="binary">Términos y Condiciones</label>
                         </div>
 
-                        <Button label="Finalizar" />
+                        <Button label="Finalizar" onClick={postData}/>
 
                     </div>
 

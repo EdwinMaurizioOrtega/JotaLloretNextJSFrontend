@@ -148,6 +148,8 @@
     }
 }
 
+
+//CSS perzonalisado
 .organizational-chart {
     display: flex;
     font-size: 0.75em;
@@ -195,51 +197,51 @@
 }
 .organizational-chart li::before,
 .organizational-chart li::after {
-    content: '';
-    position: absolute;
-    display: block;
-    box-sizing: border-box;
+    //content: '';
+    //position: absolute;
+    //display: block;
+    //box-sizing: border-box;
 }
 .organizational-chart li::before {
-    top: 50%;
-    left: 100%;
-    width: 2em;
-    border: 1px solid #555;
+    //top: 50%;
+    //left: 100%;
+    //width: 2em;
+    //border: 1px solid #555;
 }
 .organizational-chart li::after {
-    top: 0;
-    right: -2em;
-    height: 1em;
-    border: 1px solid #555;
+    //top: 0;
+    //right: -2em;
+    //height: 1em;
+    //border: 1px solid #555;
 }
 .organizational-chart ul:last-child li::before,
 .organizational-chart ul:last-child li::after {
-    content: none;
+    //content: none;
 }
 .organizational-chart li:nth-child(odd)::after {
-    top: 50%;
+    //top: 50%;
 }
 .organizational-chart ul:nth-child(2) li::after {
-    height: 3em;
+    //height: 3em;
 }
 .organizational-chart ul:nth-child(2) li:nth-child(even)::after {
-    top: -100%;
+    //top: -100%;
 }
 .organizational-chart ul:nth-child(3) li::after {
-    height: 7em;
+    //height: 7em;
 }
 .organizational-chart ul:nth-child(3) li:nth-child(even)::after {
-    top: -300%;
+    //top: -300%;
 }
 .organizational-chart ul:nth-child(4) li::after {
-    height: 15em;
+    //height: 15em;
 }
 .organizational-chart ul:nth-child(4) li:nth-child(even)::after {
-    top: -700%;
+    //top: -700%;
 }
 .organizational-chart ul:nth-child(5) li::after {
-    height: 31em;
+    //height: 31em;
 }
 .organizational-chart ul:nth-child(5) li:nth-child(even)::after {
-    top: -1500%;
+    //top: -1500%;
 }
