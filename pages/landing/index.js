@@ -92,7 +92,7 @@ const LandingPage = () => {
                     <Link href="/">
                         <a className="flex align-items-center">
                             <img src={`${contextPath}/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`} alt="Sakai Logo" height="50" className="mr-0 lg:mr-2"/>
-                            <span className="text-900 font-medium text-2xl line-height-3 mr-8">SAKAI</span>
+                            <span className="text-900 font-medium text-2xl line-height-3 mr-8">JOTALLORET</span>
                         </a>
                     </Link>
                     <StyleClass nodeRef={menuRef} selector="@next" enterClassName="hidden" leaveToClassName="hidden" hideOnOutsideClick="true">
@@ -138,7 +138,7 @@ const LandingPage = () => {
                     style={{background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #EEEFAF 0%, #C3E3FA 100%)', clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
                     <div className="mx-4 md:mx-8 mt-0 md:mt-4">
                         <h1 className="text-6xl font-bold text-gray-900 line-height-2">
-                            <span className="font-light block">Eu sem integer</span>eget magna fermentum
+                            <span className="font-light block">Participa</span>en dos pasos.
                         </h1>
                         <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Sed blandit libero volutpat sed cras. Fames ac turpis egestas integer. Placerat in egestas erat... </p>
                         <Button type="button" label="Get Started" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
@@ -150,12 +150,24 @@ const LandingPage = () => {
                 </div>
                 <div id="features_uno" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
-                    <div className="justify-content-center">
-                        <h5>CÉDULA</h5>
-                        <InputText value={cedula} onChange={(e) => setCedula(e.target.value)}/>
-                        <br></br>
-                        <h5>TELÉFONO</h5>
-                        <InputText value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
+                    <div className="p-fluid formgrid grid justify-content-center">
+
+                        <div className="field col-12 md:col-3">
+
+                        </div>
+
+                        <div className="field col-12 md:col-3">
+                            <h5>CÉDULA</h5>
+                            <InputText type="text" className="p-inputtext-sm block mb-2" value={cedula} onChange={(e) => setCedula(e.target.value)}/>
+                            <br></br>
+                            <h5>TELÉFONO</h5>
+                            <InputText type="text" className="p-inputtext-sm block mb-2" value={telefono} onChange={(e) => setTelefono(e.target.value)}/>
+
+                        </div>
+
+                        <div className="field col-12 md:col-3">
+
+                        </div>
 
                     </div>
 
@@ -163,6 +175,13 @@ const LandingPage = () => {
 
                 <div id="features_dos" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
+                    <div className="grid justify-content-center">
+
+                        <span>CUARTOS-SEMIFINAL-FINAL-CAMPEÓN</span>
+
+                    </div>
+                    <br></br>
+                    <br></br>
 
                     <div className="grid justify-content-center">
 
@@ -171,30 +190,78 @@ const LandingPage = () => {
 
 
                             <ul>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="uno">4to</label>
+                                    <InputText id="uno" style={{width: "100px", height: "20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="dos">4to</label>
+                                    <InputText id="dos" style={{width: "100px", height: "20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="tres">4to</label>
+                                    <InputText id="tres" style={{width: "100px", height: "20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="cuatro">4to</label>
+                                    <InputText id="cuatro" style={{width: "100px", height: "20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="cinco">4to</label>
+                                    <InputText id="cinco" style={{width: "100px", height: "20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="seis">4to</label>
+                                    <InputText id="seis" style={{width: "100px", height: "20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="siete">4to</label>
+                                    <InputText id="siete" style={{width: "100px", height: "20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/>
+
+                                </li>
+                                <li>
+                                    <label htmlFor="ocho">4to</label>
+                                    <InputText id="ocho" style={{width: "100px", height: "20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/>
+
+
+                                </li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto1} onChange={(e) => setCuarto1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto2} onChange={(e) => setCuarto2(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto3} onChange={(e) => setCuarto3(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={cuarto4} onChange={(e) => setCuarto4(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="nueve">SFINAL</label>
+                                    <InputText id="nueve" style={{width: "100px", height: "20px"}} value={cuarto1} onChange={(e) => setCuarto1(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="diez">SFINAL</label>
+                                    <InputText id="diez" style={{width: "100px", height: "20px"}} value={cuarto2} onChange={(e) => setCuarto2(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="once">SFINAL</label>
+                                    <InputText id="once" style={{width: "100px", height: "20px"}} value={cuarto3} onChange={(e) => setCuarto3(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="doce">SFINAL</label>
+                                    <InputText id="doce" style={{width: "100px", height: "20px"}} value={cuarto4} onChange={(e) => setCuarto4(e.target.value)}/></li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={semifinal1} onChange={(e) => setSemiFinal1(e.target.value)}/></li>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={semifinal2} onChange={(e) => setSemifinal2(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="trece">FINAL</label>
+                                    <InputText id="trece" style={{width: "100px", height: "20px"}} value={semifinal1} onChange={(e) => setSemiFinal1(e.target.value)}/></li>
+                                <li>
+                                    <label htmlFor="catorce">FINAL</label>
+                                    <InputText id="catorce" style={{width: "100px", height: "20px"}} value={semifinal2} onChange={(e) => setSemifinal2(e.target.value)}/></li>
                             </ul>
 
                             <ul>
-                                <li><InputText style={{width: "100px", height: "20px"}} value={final} onChange={(e) => setFinal(e.target.value)}/></li>
+
+                                <li>
+                                    <label htmlFor="quince">CAMPEÓN</label>
+                                    <InputText id="quince" style={{width: "100px", height: "20px"}} value={final} onChange={(e) => setFinal(e.target.value)}/></li>
                             </ul>
                         </div>
 
@@ -204,7 +271,7 @@ const LandingPage = () => {
 
                 <div id="features_tres" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
-                    <div className="justify-content-center">
+                    <div className="p-fluid formgrid grid justify-content-center">
 
                         <div className="field-checkbox">
                             <Checkbox inputId="binary" checked={checked} onChange={e => setChecked(e.checked)}/>
@@ -552,7 +619,7 @@ const LandingPage = () => {
                             <Link href="/">
                                 <a className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
                                     <img src={`${contextPath}/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`} alt="footer sections" width="50" height="50" className="mr-2"/>
-                                    <span className="font-medium text-3xl text-900">SAKAI</span>
+                                    <span className="font-medium text-3xl text-900">JOTALLORET</span>
                                 </a>
                             </Link>
                         </div>
