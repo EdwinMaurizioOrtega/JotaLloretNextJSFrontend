@@ -10,6 +10,8 @@ import {LayoutContext} from '../../layout/context/layoutcontext';
 import {InputText} from "primereact/inputtext";
 import {Checkbox} from "primereact/checkbox";
 
+import {Toast} from 'primereact/toast';
+
 
 const LandingPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -42,51 +44,72 @@ const LandingPage = () => {
 
     const [checked, setChecked] = useState(false);
 
+    const toast = useRef(null);
+
     async function postData() {
-        var axios = require('axios');
-        var data = JSON.stringify({
-            "fechaCreacion": "16-11-2022",
-            "cedula": cedula,
-            "telefono": telefono,
-            "octavo1": octavo1,
-            "octavo2": octavo2,
-            "octavo3": octavo3,
-            "octavo4": octavo4,
-            "octavo5": octavo5,
-            "octavo6": octavo6,
-            "octavo7": octavo7,
-            "octavo8": octavo8,
-            "cuarto1": cuarto1,
-            "cuarto2": cuarto2,
-            "cuarto3": cuarto3,
-            "cuarto4": cuarto4,
-            "semifinal1": semifinal1,
-            "semifinal2": semifinal2,
-            "finalfinal": final,
-            "tc": checked
-        });
+        console.log("Terminos y Condiciones: " + checked)
+        if (cedula != "" && telefono != "" && octavo1 != "" && final != "" && checked == true) {
 
-        var config = {
-            method: 'post',
-            url: 'http://localhost:8080/api/pollas',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data : data
-        };
 
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
+            var axios = require('axios');
+            var data = JSON.stringify({
+                "fechaCreacion": "16-11-2022",
+                "cedula": cedula,
+                "telefono": telefono,
+                "octavo1": octavo1,
+                "octavo2": octavo2,
+                "octavo3": octavo3,
+                "octavo4": octavo4,
+                "octavo5": octavo5,
+                "octavo6": octavo6,
+                "octavo7": octavo7,
+                "octavo8": octavo8,
+                "cuarto1": cuarto1,
+                "cuarto2": cuarto2,
+                "cuarto3": cuarto3,
+                "cuarto4": cuarto4,
+                "semifinal1": semifinal1,
+                "semifinal2": semifinal2,
+                "finalfinal": final,
+                "tc": checked
             });
 
+            var config = {
+                method: 'post',
+                url: 'http://localhost:8080/api/pollas',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+
+            axios(config)
+                .then(function (response) {
+                    console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+        } else {
+
+            showError();
+
+        }
+
+    }
+
+
+    const showError = () => {
+        toast.current.show({severity: 'error', summary: 'Mensaje de error', detail: 'Obligatorio llenar todos los campos.', life: 3000});
     }
 
     return (
         <div className="surface-0 flex justify-content-center">
+
+            <Toast ref={toast}/>
+
             <div id="home" className="landing-wrapper overflow-hidden">
                 <div className="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static">
                     <Link href="/">
@@ -102,32 +125,32 @@ const LandingPage = () => {
                         <ul className="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
                             <li>
                                 <a href="#home" className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                                    <span>Home</span>
+                                    <span>Inicio</span>
                                 </a>
                                 <Ripple/>
                             </li>
                             <li>
-                                <a href='#features' className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                                    <span>Features</span>
+                                <a href='#features_uno' className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                                    <span>1. REGÍSTRATE</span>
                                 </a>
                                 <Ripple/>
                             </li>
                             <li>
-                                <a href="#highlights" className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                                    <span>Highlights</span>
+                                <a href="#features_dos" className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
+                                    <span>2. HAZ TUS PREDICCIONES</span>
                                 </a>
                                 <Ripple/>
                             </li>
-                            <li>
-                                <a href="#pricing" className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">
-                                    <span>Pricing</span>
-                                </a>
-                                <Ripple/>
-                            </li>
+                            {/*<li>*/}
+                            {/*    <a href="#pricing" className="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3">*/}
+                            {/*        <span>Pricing</span>*/}
+                            {/*    </a>*/}
+                            {/*    <Ripple/>*/}
+                            {/*</li>*/}
                         </ul>
                         <div className="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                            <Button label="Login" className="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></Button>
-                            <Button label="Register" className="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></Button>
+                            {/*<Button label="Login" className="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></Button>*/}
+                            {/*<Button label="Register" className="p-button-rounded border-none ml-5 font-light line-height-2 bg-blue-500 text-white"></Button>*/}
                         </div>
                     </div>
                 </div>
@@ -135,13 +158,15 @@ const LandingPage = () => {
                 <div
                     id="hero"
                     className="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
-                    style={{background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #EEEFAF 0%, #C3E3FA 100%)', clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
+                    style={{backgroundRepeat: 'no-repeat!important', background: `url(https://pollaya.com/wp-content/uploads/2022/04/slide-mundial3.png)`, clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
                     <div className="mx-4 md:mx-8 mt-0 md:mt-4">
-                        <h1 className="text-6xl font-bold text-gray-900 line-height-2">
-                            <span className="font-light block">Participa</span>en dos pasos.
+                        <h1 style={{color: 'white!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
+                            <span style={{color: 'white!important'}} className="font-light block">Participa</span>
+
+                            en dos pasos.
                         </h1>
-                        <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Sed blandit libero volutpat sed cras. Fames ac turpis egestas integer. Placerat in egestas erat... </p>
-                        <Button type="button" label="Get Started" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
+                        <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700" style={{color: 'white!important'}}>Crea tu Polla online GRATIS para el Mundial de fútbol Qatar 2022 </p>
+                        <Button style={{backgroundColor: '#ff1d45!important'}} type="button" label="Conoce más" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
                     </div>
                     <div className="flex justify-content-center md:justify-content-end">
                         <img src={`${contextPath}/demo/images/landing/screen-1.png`} alt="Hero Image" className="w-9 md:w-auto"/>
@@ -151,12 +176,17 @@ const LandingPage = () => {
                 <div id="features_uno" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
                     <div className="p-fluid formgrid grid justify-content-center">
+                        <div className="col-12 text-center mt-8 mb-4">
+                            <h2 className="text-900 font-normal mb-2">1. REGÍSTRATE</h2>
+                            <span className="text-600 text-2xl">Crea tu cuenta.</span>
+                        </div>
 
                         <div className="field col-12 md:col-3">
 
                         </div>
 
                         <div className="field col-12 md:col-3">
+
                             <h5>CÉDULA</h5>
                             <InputText type="text" className="p-inputtext-sm block mb-2" value={cedula} onChange={(e) => setCedula(e.target.value)}/>
                             <br></br>
@@ -174,6 +204,11 @@ const LandingPage = () => {
                 </div>
 
                 <div id="features_dos" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+
+                    <div className="col-12 text-center mt-8 mb-4">
+                        <h2 className="text-900 font-normal mb-2">2. HAZ TUS PREDICCIONES</h2>
+                        <span className="text-600 text-2xl">Pronostica los resultados de los partidos.</span>
+                    </div>
 
                     <div className="grid justify-content-center">
 
@@ -460,11 +495,10 @@ const LandingPage = () => {
                             className="col-12 mt-8 mb-8 p-2 md:p-8"
                             style={{borderRadius: '20px', background: 'linear-gradient(0deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, #EFE1AF 0%, #C3DCFA 100%)'}}>
                             <div className="flex flex-column justify-content-center align-items-center text-center px-3 py-3 md:py-0">
-                                <h3 className="text-gray-900 mb-2">Joséphine Miller</h3>
-                                <span className="text-gray-600 text-2xl">Peak Interactive</span>
+                                <h3 className="text-gray-900 mb-2">Contáctanos</h3>
+                                <span className="text-gray-600 text-2xl">JOTALLORET</span>
                                 <p className="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-4" style={{maxWidth: '800px'}}>
-                                    “Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                                    laborum.”
+                                    “Para más información sobre cómo jugar o crear tu polla futbolera contáctanos por Facebook o correo electrónico.”
                                 </p>
                                 <img src={`${contextPath}/demo/images/landing/peak-logo.svg`} className="mt-4" alt="Company logo"/>
                             </div>
@@ -627,37 +661,37 @@ const LandingPage = () => {
                         <div className="col-12 md:col-10 lg:col-7">
                             <div className="grid text-center md:text-left">
                                 <div className="col-12 md:col-3">
-                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
+                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Compañía</h4>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Sobre nosotros</a>
+                                    {/*<a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>*/}
+                                    {/*<a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>*/}
+                                    {/*<a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>*/}
+                                    {/*<a className="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>*/}
                                 </div>
 
-                                <div className="col-12 md:col-3 mt-4 md:mt-0">
-                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
-                                </div>
+                                {/*<div className="col-12 md:col-3 mt-4 md:mt-0">*/}
+                                {/*    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>*/}
+                                {/*</div>*/}
 
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
-                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
+                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Comunidad</h4>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Facebook</a>
                                     <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">
-                                        Events
+                                        Instagram
                                         <img src={`${contextPath}/demo/images/landing/new-badge.svg`} className="ml-2"/>
                                     </a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Twitter</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer text-700">WhatsApp</a>
                                 </div>
 
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
                                     <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Política de marca</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Política de privacidad</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer text-700">Términos de servicio</a>
                                 </div>
                             </div>
                         </div>
