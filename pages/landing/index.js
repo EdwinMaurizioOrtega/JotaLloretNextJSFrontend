@@ -78,7 +78,7 @@ const LandingPage = () => {
 
             var config = {
                 method: 'post',
-                url: 'http://137.184.236.99:8080/api/pollas',
+                url: 'https://jotalloret.herokuapp.com/api/pollas',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -97,7 +97,7 @@ const LandingPage = () => {
             //Sumar arboles SEMBRADOS
             var configA = {
                 method: 'put',
-                url: 'http://137.184.236.99:8080/api/arboles/incrementar',
+                url: 'https://jotalloret.herokuapp.com/api/arboles/incrementar',
                 headers: {}
             };
 
@@ -161,7 +161,7 @@ const LandingPage = () => {
 
     var config = {
         method: 'get',
-        url: 'http://137.184.236.99:8080/api/arboles',
+        url: 'https://jotalloret.herokuapp.com/api/arboles',
         headers: {}
     };
 
