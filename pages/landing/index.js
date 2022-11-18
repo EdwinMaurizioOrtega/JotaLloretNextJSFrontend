@@ -78,7 +78,7 @@ const LandingPage = () => {
 
             var config = {
                 method: 'post',
-                url: 'http://localhost:8080/api/pollas',
+                url: 'http://137.184.236.99:8080/api/pollas',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -97,7 +97,7 @@ const LandingPage = () => {
             //Sumar arboles SEMBRADOS
             var configA = {
                 method: 'put',
-                url: 'http://localhost:8080/api/arboles/incrementar',
+                url: 'http://137.184.236.99:8080/api/arboles/incrementar',
                 headers: {}
             };
 
@@ -161,7 +161,7 @@ const LandingPage = () => {
 
     var config = {
         method: 'get',
-        url: 'http://localhost:8080/api/arboles',
+        url: 'http://137.184.236.99:8080/api/arboles',
         headers: {}
     };
 
