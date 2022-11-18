@@ -12,6 +12,8 @@ import {Checkbox} from "primereact/checkbox";
 
 import {Toast} from 'primereact/toast';
 
+var axios = require('axios');
+
 
 const LandingPage = () => {
     const contextPath = getConfig().publicRuntimeConfig.contextPath;
@@ -85,11 +87,55 @@ const LandingPage = () => {
 
             axios(config)
                 .then(function (response) {
-                    console.log(JSON.stringify(response.data));
+                    // console.log(JSON.stringify(response.data));
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+
+
+            //Sumar arboles SEMBRADOS
+            var configA = {
+                method: 'put',
+                url: 'http://localhost:8080/api/arboles/incrementar',
+                headers: {}
+            };
+
+            axios(configA)
+                .then(function (response) {
+                    // console.log(JSON.stringify(response.data));
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+
+            showSuccess();
+
+            //Limpiamos todfos los campos
+
+            setCedula('')
+            setTelefono('')
+            setOctavo1('')
+            setOctavo2('')
+            setOctavo3('')
+            setOctavo4('')
+            setOctavo5('')
+            setOctavo6('')
+            setOctavo7('')
+            setOctavo8('')
+
+            setCuarto1('')
+            setCuarto2('')
+            setCuarto3('')
+            setCuarto4('')
+
+            setSemiFinal1('')
+            setSemifinal2('')
+
+            setFinal('')
+
+            setChecked(false)
 
 
         } else {
@@ -105,6 +151,30 @@ const LandingPage = () => {
         toast.current.show({severity: 'error', summary: 'Mensaje de error', detail: 'Obligatorio llenar todos los campos.', life: 3000});
     }
 
+    const showSuccess =() => {
+        toast.current.show({severity: 'success', summary: 'Mensaje de éxito', detail: 'Polla guardada.'});
+    }
+
+
+    //Consultar arboles sembrados
+    const [data, setData] = useState([]);
+
+    var config = {
+        method: 'get',
+        url: 'http://localhost:8080/api/arboles',
+        headers: {}
+    };
+
+    axios(config)
+        .then(function (response) {
+            // console.log(JSON.stringify(response.data));
+            setData(response.data)
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
     return (
         <div className="surface-0 flex justify-content-center">
 
@@ -114,8 +184,8 @@ const LandingPage = () => {
                 <div className="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static">
                     <Link href="/">
                         <a className="flex align-items-center">
-                            <img src={`${contextPath}/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`} alt="Sakai Logo" height="50" className="mr-0 lg:mr-2"/>
-                            <span className="text-900 font-medium text-2xl line-height-3 mr-8">JOTALLORET</span>
+                            <img src={`${contextPath}/layout/images/logo.svg`} alt="Sakai Logo" height="50" className="mr-0 lg:mr-2"/>
+                            <span className="text-900 font-medium text-2xl line-height-3 mr-8">.</span>
                         </a>
                     </Link>
                     <StyleClass nodeRef={menuRef} selector="@next" enterClassName="hidden" leaveToClassName="hidden" hideOnOutsideClick="true">
@@ -158,10 +228,10 @@ const LandingPage = () => {
                 <div
                     id="hero"
                     className="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
-                    style={{backgroundRepeat: 'no-repeat!important', background: `url(https://pollaya.com/wp-content/uploads/2022/04/slide-mundial3.png)`, clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
+                    style={{backgroundRepeat: 'no-repeat!important', background: `url(${contextPath}/demo/images/landing/screen-3.png)`, clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
                     <div className="mx-4 md:mx-8 mt-0 md:mt-4">
-                        <h1 style={{color: 'white!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
-                            <span style={{color: 'white!important'}} className="font-light block">Participa</span>
+                        <h1 style={{color: 'skyblue!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
+                            <span style={{color: 'skyblue!important'}} className="font-light block">Participa</span>
 
                             en dos pasos.
                         </h1>
@@ -169,7 +239,7 @@ const LandingPage = () => {
                         <Button style={{backgroundColor: '#ff1d45!important'}} type="button" label="Conoce más" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
                     </div>
                     <div className="flex justify-content-center md:justify-content-end">
-                        <img src={`${contextPath}/demo/images/landing/screen-1.png`} alt="Hero Image" className="w-9 md:w-auto"/>
+                        <img src={`${contextPath}/demo/images/landing/screen-4.png`} alt="Hero Image" className="w-9 md:w-auto"/>
                     </div>
 
                 </div>
@@ -319,177 +389,196 @@ const LandingPage = () => {
 
                 </div>
 
+
+                <div id="features_cuatro" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+
+                    <div className="p-fluid formgrid grid justify-content-center">
+
+                        <div className="col-12 text-center mt-8 mb-4">
+                            <h2 className="text-900 font-normal mb-2">Nuestra misión tiene {data.contador} árboles sembrados.</h2>
+                            <span className="text-600 text-2xl">Con tu participación sembraremos árboles en suelos degradados y zonas deforestadas.</span>
+                        </div>
+
+                        <div className="field-checkbox">
+                            <label htmlFor="binary"></label>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
                 <div id="features" className="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
 
 
                     <div className="grid justify-content-center">
 
-                        <div className="col-12 text-center mt-8 mb-4">
-                            <h2 className="text-900 font-normal mb-2">Marvelous Features</h2>
-                            <span className="text-600 text-2xl">Placerat in egestas erat...</span>
-                        </div>
+                        {/*<div className="col-12 text-center mt-8 mb-4">*/}
+                        {/*    <h2 className="text-900 font-normal mb-2">Marvelous Features</h2>*/}
+                        {/*    <span className="text-600 text-2xl">Placerat in egestas erat...</span>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-yellow-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-users text-2xl text-yellow-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Easy to Use</h5>
-                                    <span className="text-600">Posuere morbi leo urna molestie.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(187, 199, 205, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-yellow-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-users text-2xl text-yellow-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Easy to Use</h5>*/}
+                        {/*            <span className="text-600">Posuere morbi leo urna molestie.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(145,226,237,0.2),rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-cyan-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-palette text-2xl text-cyan-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Fresh Design</h5>
-                                    <span className="text-600">Semper risus in hendrerit.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(145,226,237,0.2),rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2), rgba(172, 180, 223, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-cyan-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-palette text-2xl text-cyan-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Fresh Design</h5>*/}
+                        {/*            <span className="text-600">Semper risus in hendrerit.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-indigo-200" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-map text-2xl text-indigo-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Well Documented</h5>
-                                    <span className="text-600">Non arcu risus quis varius quam quisque.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(145, 226, 237, 0.2), rgba(172, 180, 223, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(246, 158, 188, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-indigo-200" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-map text-2xl text-indigo-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Well Documented</h5>*/}
+                        {/*            <span className="text-600">Non arcu risus quis varius quam quisque.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(187, 199, 205, 0.2),rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2),rgba(145, 210, 204, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-id-card text-2xl text-bluegray-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Responsive Layout</h5>
-                                    <span className="text-600">Nulla malesuada pellentesque elit.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(187, 199, 205, 0.2),rgba(251, 199, 145, 0.2)), linear-gradient(180deg, rgba(253, 228, 165, 0.2),rgba(145, 210, 204, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-id-card text-2xl text-bluegray-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Responsive Layout</h5>*/}
+                        {/*            <span className="text-600">Nulla malesuada pellentesque elit.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(187, 199, 205, 0.2),rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(145, 226, 237, 0.2),rgba(160, 210, 250, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-orange-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-star text-2xl text-orange-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Clean Code</h5>
-                                    <span className="text-600">Condimentum lacinia quis vel eros.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(187, 199, 205, 0.2),rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(145, 226, 237, 0.2),rgba(160, 210, 250, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-orange-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-star text-2xl text-orange-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Clean Code</h5>*/}
+                        {/*            <span className="text-600">Condimentum lacinia quis vel eros.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(251, 199, 145, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(212, 162, 221, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-pink-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-moon text-2xl text-pink-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Dark Mode</h5>
-                                    <span className="text-600">Convallis tellus id interdum velit laoreet.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(251, 199, 145, 0.2), rgba(246, 158, 188, 0.2)), linear-gradient(180deg, rgba(172, 180, 223, 0.2), rgba(212, 162, 221, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-pink-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-moon text-2xl text-pink-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Dark Mode</h5>*/}
+                        {/*            <span className="text-600">Convallis tellus id interdum velit laoreet.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-teal-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-shopping-cart text-2xl text-teal-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Ready to Use</h5>
-                                    <span className="text-600">Mauris sit amet massa vitae.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(160, 210, 250, 0.2)), linear-gradient(180deg, rgba(187, 199, 205, 0.2), rgba(145, 210, 204, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-teal-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-shopping-cart text-2xl text-teal-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Ready to Use</h5>*/}
+                        {/*            <span className="text-600">Mauris sit amet massa vitae.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-blue-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-globe text-2xl text-blue-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Modern Practices</h5>
-                                    <span className="text-600">Elementum nibh tellus molestie nunc non.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(145, 210, 204, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(251, 199, 145, 0.2), rgba(160, 210, 250, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-blue-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-globe text-2xl text-blue-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Modern Practices</h5>*/}
+                        {/*            <span className="text-600">Elementum nibh tellus molestie nunc non.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className="col-12 md:col-12 lg:col-4 p-0 lg-4 mt-4 lg:mt-0">
-                            <div
-                                style={{
-                                    height: '160px',
-                                    padding: '2px',
-                                    borderRadius: '10px',
-                                    background: 'linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))'
-                                }}>
-                                <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>
-                                    <div className="flex align-items-center justify-content-center bg-purple-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>
-                                        <i className="pi pi-fw pi-eye text-2xl text-purple-700"></i>
-                                    </div>
-                                    <h5 className="mb-2 text-900">Privacy</h5>
-                                    <span className="text-600">Neque egestas congue quisque.</span>
-                                </div>
-                            </div>
-                        </div>
+                        {/*<div className="col-12 md:col-12 lg:col-4 p-0 lg-4 mt-4 lg:mt-0">*/}
+                        {/*    <div*/}
+                        {/*        style={{*/}
+                        {/*            height: '160px',*/}
+                        {/*            padding: '2px',*/}
+                        {/*            borderRadius: '10px',*/}
+                        {/*            background: 'linear-gradient(90deg, rgba(160, 210, 250, 0.2), rgba(212, 162, 221, 0.2)), linear-gradient(180deg, rgba(246, 158, 188, 0.2), rgba(212, 162, 221, 0.2))'*/}
+                        {/*        }}>*/}
+                        {/*        <div className="p-3 surface-card h-full" style={{borderRadius: '8px'}}>*/}
+                        {/*            <div className="flex align-items-center justify-content-center bg-purple-200 mb-3" style={{width: '3.5rem', height: '3.5rem', borderRadius: '10px'}}>*/}
+                        {/*                <i className="pi pi-fw pi-eye text-2xl text-purple-700"></i>*/}
+                        {/*            </div>*/}
+                        {/*            <h5 className="mb-2 text-900">Privacy</h5>*/}
+                        {/*            <span className="text-600">Neque egestas congue quisque.</span>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
                         <div
                             className="col-12 mt-8 mb-8 p-2 md:p-8"
@@ -500,160 +589,160 @@ const LandingPage = () => {
                                 <p className="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-4" style={{maxWidth: '800px'}}>
                                     “Para más información sobre cómo jugar o crear tu polla futbolera contáctanos por Facebook o correo electrónico.”
                                 </p>
-                                <img src={`${contextPath}/demo/images/landing/peak-logo.svg`} className="mt-4" alt="Company logo"/>
+                                <img src={`${contextPath}/layout/images/logo.svg`} height="100" className="mt-4" alt="Company logo"/>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div id="highlights" className="py-4 px-4 lg:px-8 mx-0 my-6 lg:mx-8">
-                    <div className="text-center">
-                        <h2 className="text-900 font-normal mb-2">Powerful Everywhere</h2>
-                        <span className="text-600 text-2xl">Amet consectetur adipiscing elit...</span>
-                    </div>
+                {/*<div id="highlights" className="py-4 px-4 lg:px-8 mx-0 my-6 lg:mx-8">*/}
+                {/*    <div className="text-center">*/}
+                {/*        <h2 className="text-900 font-normal mb-2">Powerful Everywhere</h2>*/}
+                {/*        <span className="text-600 text-2xl">Amet consectetur adipiscing elit...</span>*/}
+                {/*    </div>*/}
 
-                    <div className="grid mt-8 pb-2 md:pb-8">
-                        <div className="flex justify-content-center col-12 lg:col-6 bg-purple-100 p-0 flex-order-1 lg:flex-order-0" style={{borderRadius: '8px'}}>
-                            <img src={`${contextPath}/demo/images/landing/mockup.svg`} className="w-11" alt="mockup mobile"/>
-                        </div>
+                {/*    <div className="grid mt-8 pb-2 md:pb-8">*/}
+                {/*        <div className="flex justify-content-center col-12 lg:col-6 bg-purple-100 p-0 flex-order-1 lg:flex-order-0" style={{borderRadius: '8px'}}>*/}
+                {/*            <img src={`${contextPath}/demo/images/landing/mockup.svg`} className="w-11" alt="mockup mobile"/>*/}
+                {/*        </div>*/}
 
-                        <div className="col-12 lg:col-6 my-auto flex flex-column lg:align-items-end text-center lg:text-right">
-                            <div className="flex align-items-center justify-content-center bg-purple-200 align-self-center lg:align-self-end" style={{width: '4.2rem', height: '4.2rem', borderRadius: '10px'}}>
-                                <i className="pi pi-fw pi-mobile text-5xl text-purple-700"></i>
-                            </div>
-                            <h2 className="line-height-1 text-900 text-4xl font-normal">Congue Quisque Egestas</h2>
-                            <span className="text-700 text-2xl line-height-3 ml-0 md:ml-2" style={{maxWidth: '650px'}}>
-                                Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.
-                            </span>
-                        </div>
-                    </div>
+                {/*        <div className="col-12 lg:col-6 my-auto flex flex-column lg:align-items-end text-center lg:text-right">*/}
+                {/*            <div className="flex align-items-center justify-content-center bg-purple-200 align-self-center lg:align-self-end" style={{width: '4.2rem', height: '4.2rem', borderRadius: '10px'}}>*/}
+                {/*                <i className="pi pi-fw pi-mobile text-5xl text-purple-700"></i>*/}
+                {/*            </div>*/}
+                {/*            <h2 className="line-height-1 text-900 text-4xl font-normal">Congue Quisque Egestas</h2>*/}
+                {/*            <span className="text-700 text-2xl line-height-3 ml-0 md:ml-2" style={{maxWidth: '650px'}}>*/}
+                {/*                Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.*/}
+                {/*            </span>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
 
-                    <div className="grid my-8 pt-2 md:pt-8">
-                        <div className="col-12 lg:col-6 my-auto flex flex-column text-center lg:text-left lg:align-items-start">
-                            <div className="flex align-items-center justify-content-center bg-yellow-200 align-self-center lg:align-self-start" style={{width: '4.2rem', height: '4.2rem', borderRadius: '10px'}}>
-                                <i className="pi pi-fw pi-desktop text-5xl text-yellow-700"></i>
-                            </div>
-                            <h2 className="line-height-1 text-900 text-4xl font-normal">Celerisque Eu Ultrices</h2>
-                            <span className="text-700 text-2xl line-height-3 mr-0 md:mr-2" style={{maxWidth: '650px'}}>
-                                Adipiscing commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi.
-                            </span>
-                        </div>
+                {/*    <div className="grid my-8 pt-2 md:pt-8">*/}
+                {/*        <div className="col-12 lg:col-6 my-auto flex flex-column text-center lg:text-left lg:align-items-start">*/}
+                {/*            <div className="flex align-items-center justify-content-center bg-yellow-200 align-self-center lg:align-self-start" style={{width: '4.2rem', height: '4.2rem', borderRadius: '10px'}}>*/}
+                {/*                <i className="pi pi-fw pi-desktop text-5xl text-yellow-700"></i>*/}
+                {/*            </div>*/}
+                {/*            <h2 className="line-height-1 text-900 text-4xl font-normal">Celerisque Eu Ultrices</h2>*/}
+                {/*            <span className="text-700 text-2xl line-height-3 mr-0 md:mr-2" style={{maxWidth: '650px'}}>*/}
+                {/*                Adipiscing commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi.*/}
+                {/*            </span>*/}
+                {/*        </div>*/}
 
-                        <div className="flex justify-content-end flex-order-1 sm:flex-order-2 col-12 lg:col-6 bg-yellow-100 p-0" style={{borderRadius: '8px'}}>
-                            <img src={`${contextPath}/demo/images/landing/mockup-desktop.svg`} className="w-11" alt="mockup"/>
-                        </div>
-                    </div>
-                </div>
+                {/*        <div className="flex justify-content-end flex-order-1 sm:flex-order-2 col-12 lg:col-6 bg-yellow-100 p-0" style={{borderRadius: '8px'}}>*/}
+                {/*            <img src={`${contextPath}/demo/images/landing/mockup-desktop.svg`} className="w-11" alt="mockup"/>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
-                <div id="pricing" className="py-4 px-4 lg:px-8 my-2 md:my-4">
-                    <div className="text-center">
-                        <h2 className="text-900 font-normal mb-2">Matchless Pricing</h2>
-                        <span className="text-600 text-2xl">Amet consectetur adipiscing elit...</span>
-                    </div>
+                {/*<div id="pricing" className="py-4 px-4 lg:px-8 my-2 md:my-4">*/}
+                {/*    <div className="text-center">*/}
+                {/*        <h2 className="text-900 font-normal mb-2">Matchless Pricing</h2>*/}
+                {/*        <span className="text-600 text-2xl">Amet consectetur adipiscing elit...</span>*/}
+                {/*    </div>*/}
 
-                    <div className="grid justify-content-between mt-8 md:mt-0">
-                        <div className="col-12 lg:col-4 p-0 md:p-3">
-                            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">
-                                <h3 className="text-900 text-center my-5">Free</h3>
-                                <img src={`${contextPath}/demo/images/landing/free.svg`} className="w-10 h-10 mx-auto" alt="free"/>
-                                <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">$0</span>
-                                    <span className="text-600">per month</span>
-                                    <Button label="Get Started" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
-                                </div>
-                                <Divider className="w-full bg-surface-200"></Divider>
-                                <ul className="my-5 list-none p-0 flex text-900 flex-column">
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                {/*    <div className="grid justify-content-between mt-8 md:mt-0">*/}
+                {/*        <div className="col-12 lg:col-4 p-0 md:p-3">*/}
+                {/*            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">*/}
+                {/*                <h3 className="text-900 text-center my-5">Free</h3>*/}
+                {/*                <img src={`${contextPath}/demo/images/landing/free.svg`} className="w-10 h-10 mx-auto" alt="free"/>*/}
+                {/*                <div className="my-5 text-center">*/}
+                {/*                    <span className="text-5xl font-bold mr-2 text-900">$0</span>*/}
+                {/*                    <span className="text-600">per month</span>*/}
+                {/*                    <Button label="Get Started" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>*/}
+                {/*                </div>*/}
+                {/*                <Divider className="w-full bg-surface-200"></Divider>*/}
+                {/*                <ul className="my-5 list-none p-0 flex text-900 flex-column">*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Responsive Layout</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Unlimited Push Messages</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">50 Support Ticket</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Free Shipping</span>*/}
+                {/*                    </li>*/}
+                {/*                </ul>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
 
-                        <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
-                            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">
-                                <h3 className="text-900 text-center my-5">Startup</h3>
-                                <img src={`${contextPath}/demo/images/landing/startup.svg`} className="w-10 h-10 mx-auto" alt="startup"/>
-                                <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">$1</span>
-                                    <span className="text-600">per month</span>
-                                    <Button label="Try Free" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
-                                </div>
-                                <Divider className="w-full bg-surface-200"></Divider>
-                                <ul className="my-5 list-none p-0 flex text-900 flex-column">
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                {/*        <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">*/}
+                {/*            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">*/}
+                {/*                <h3 className="text-900 text-center my-5">Startup</h3>*/}
+                {/*                <img src={`${contextPath}/demo/images/landing/startup.svg`} className="w-10 h-10 mx-auto" alt="startup"/>*/}
+                {/*                <div className="my-5 text-center">*/}
+                {/*                    <span className="text-5xl font-bold mr-2 text-900">$1</span>*/}
+                {/*                    <span className="text-600">per month</span>*/}
+                {/*                    <Button label="Try Free" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>*/}
+                {/*                </div>*/}
+                {/*                <Divider className="w-full bg-surface-200"></Divider>*/}
+                {/*                <ul className="my-5 list-none p-0 flex text-900 flex-column">*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Responsive Layout</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Unlimited Push Messages</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">50 Support Ticket</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Free Shipping</span>*/}
+                {/*                    </li>*/}
+                {/*                </ul>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
 
-                        <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">
-                            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">
-                                <h3 className="text-900 text-center my-5">Enterprise</h3>
-                                <img src={`${contextPath}/demo/images/landing/enterprise.svg`} className="w-10 h-10 mx-auto" alt="enterprise"/>
-                                <div className="my-5 text-center">
-                                    <span className="text-5xl font-bold mr-2 text-900">$999</span>
-                                    <span className="text-600">per month</span>
-                                    <Button label="Get a Quote" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>
-                                </div>
-                                <Divider className="w-full bg-surface-200"></Divider>
-                                <ul className="my-5 list-none p-0 flex text-900 flex-column">
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Responsive Layout</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Unlimited Push Messages</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">50 Support Ticket</span>
-                                    </li>
-                                    <li className="py-2">
-                                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>
-                                        <span className="text-xl line-height-3">Free Shipping</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/*        <div className="col-12 lg:col-4 p-0 md:p-3 mt-4 md:mt-0">*/}
+                {/*            <div className="p-3 flex flex-column border-200 pricing-card cursor-pointer border-2 hover:border-primary transition-duration-300 transition-all">*/}
+                {/*                <h3 className="text-900 text-center my-5">Enterprise</h3>*/}
+                {/*                <img src={`${contextPath}/demo/images/landing/enterprise.svg`} className="w-10 h-10 mx-auto" alt="enterprise"/>*/}
+                {/*                <div className="my-5 text-center">*/}
+                {/*                    <span className="text-5xl font-bold mr-2 text-900">$999</span>*/}
+                {/*                    <span className="text-600">per month</span>*/}
+                {/*                    <Button label="Get a Quote" className="block mx-auto mt-4 p-button-rounded border-none ml-3 font-light line-height-2 bg-blue-500 text-white"></Button>*/}
+                {/*                </div>*/}
+                {/*                <Divider className="w-full bg-surface-200"></Divider>*/}
+                {/*                <ul className="my-5 list-none p-0 flex text-900 flex-column">*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Responsive Layout</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Unlimited Push Messages</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">50 Support Ticket</span>*/}
+                {/*                    </li>*/}
+                {/*                    <li className="py-2">*/}
+                {/*                        <i className="pi pi-fw pi-check text-xl text-cyan-500 mr-2"></i>*/}
+                {/*                        <span className="text-xl line-height-3">Free Shipping</span>*/}
+                {/*                    </li>*/}
+                {/*                </ul>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
                 <div className="py-4 px-4 mx-0 mt-8 lg:mx-8">
                     <div className="grid justify-content-between">
                         <div className="col-12 md:col-2" style={{marginTop: '-1.5rem'}}>
                             <Link href="/">
                                 <a className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
-                                    <img src={`${contextPath}/layout/images/${layoutConfig.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}.svg`} alt="footer sections" width="50" height="50" className="mr-2"/>
-                                    <span className="font-medium text-3xl text-900">JOTALLORET</span>
+                                    <img src={`${contextPath}/layout/images/logo.svg`} alt="footer sections" height="100" className="mr-2"/>
+                                    {/*<span className="font-medium text-3xl text-900">JOTALLORET</span>*/}
                                 </a>
                             </Link>
                         </div>
