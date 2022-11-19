@@ -11,6 +11,10 @@ import {InputText} from "primereact/inputtext";
 import {Checkbox} from "primereact/checkbox";
 
 import {Toast} from 'primereact/toast';
+import Head from "next/head";
+import AppTopbar from "../../layout/AppTopbar";
+import AppSidebar from "../../layout/AppSidebar";
+import AppFooter from "../../layout/AppFooter";
 
 var axios = require('axios');
 
@@ -49,13 +53,15 @@ const LandingPage = () => {
     const toast = useRef(null);
 
     async function postData() {
+
+        const fecha = new Date().toLocaleDateString()
         console.log("Terminos y Condiciones: " + checked)
         if (cedula != "" && telefono != "" && octavo1 != "" && final != "" && checked == true) {
 
 
             var axios = require('axios');
             var data = JSON.stringify({
-                "fechaCreacion": "16-11-2022",
+                "fechaCreacion": fecha,
                 "cedula": cedula,
                 "telefono": telefono,
                 "octavo1": octavo1,
@@ -175,8 +181,24 @@ const LandingPage = () => {
         });
 
 
+    // function IrSeccion(){
+    //     <a href="features_cuatro"></a>
+    // }
+
+
     return (
+
+
+
         <div className="surface-0 flex justify-content-center">
+
+            <React.Fragment>
+
+                <div  >
+
+                    <AppConfig />
+                </div>
+            </React.Fragment>
 
             <Toast ref={toast}/>
 
@@ -232,11 +254,10 @@ const LandingPage = () => {
                     <div className="mx-4 md:mx-8 mt-0 md:mt-4">
                         <h1 style={{color: 'skyblue!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
                             <span style={{color: 'skyblue!important'}} className="font-light block">Participa</span>
-
                             en dos pasos.
                         </h1>
                         <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700" style={{color: 'white!important'}}>Crea tu Polla online GRATIS para el Mundial de fútbol Qatar 2022 </p>
-                        <Button style={{backgroundColor: '#ff1d45!important'}} type="button" label="Conoce más" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>
+                        {/*<Button onClick={IrSeccion}  style={{backgroundColor: '#ff1d45!important'}} type="button" label="Conoce más" className="p-button-rounded text-xl border-none mt-3 bg-blue-500 font-normal line-height-3 px-3 text-white"></Button>*/}
                     </div>
                     <div className="flex justify-content-center md:justify-content-end">
                         <img src={`${contextPath}/demo/images/landing/screen-4.png`} alt="Hero Image" className="w-9 md:w-auto"/>
@@ -394,16 +415,17 @@ const LandingPage = () => {
 
                     <div className="p-fluid formgrid grid justify-content-center">
 
-                        <div className="col-12 text-center mt-8 mb-4">
+                        <div className="col-12 text-center mt-8 mb-4"
+                        >
                             <h2 className="text-900 font-normal mb-2">Nuestra misión tiene {data.contador} árboles sembrados.</h2>
                             <span className="text-600 text-2xl">Con tu participación sembraremos árboles en suelos degradados y zonas deforestadas.</span>
                         </div>
 
-                        <div className="field-checkbox">
-                            <label htmlFor="binary"></label>
-                        </div>
+                    </div>
+                    <div >
+                        <img src={`${contextPath}/demo/images/landing/screen-2.png`} alt="Sakai Logo" height="50%" className="mr-0 lg:mr-2"/>
 
-
+                        {/*<img src={{backgroundRepeat: 'no-repeat!important', background: `url(${contextPath}/demo/images/landing/screen-2.png)`}}/>*/}
                     </div>
 
                 </div>
