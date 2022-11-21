@@ -11,7 +11,7 @@ class MyDocument extends Document {
         const contextPath = getConfig().publicRuntimeConfig.contextPath;
 
         return (
-            <Html lang="en">
+            <Html lang="es">
                 <Head>
                     <link id="theme-css" href={`${contextPath}/themes/lara-light-indigo/theme.css`} rel="stylesheet"></link>
                 </Head>

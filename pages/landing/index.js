@@ -415,10 +415,14 @@ const LandingPage = () => {
 
                     <div className="p-fluid formgrid grid justify-content-center">
 
-                        <div className="col-12 text-center mt-8 mb-4"
+                        <div className="col-9 text-center mb-4"
                         >
-                            <h2 className="text-900 font-normal mb-2">Nuestra misión tiene {data.contador} árboles sembrados.</h2>
-                            <span className="text-600 text-2xl">Con tu participación sembraremos árboles en suelos degradados y zonas deforestadas.</span>
+
+                            <img src={`${contextPath}/layout/images/tree-green.gif`} height="100" className="mt-4" alt="Company logo"/>
+                            <br></br>
+                            <span className="text-600 text-2xl">Contador de árboles:</span>
+                            <p style={{fontSize: '50px!important;', color: 'white'}}><b style={{backgroundColor: "black", borderRadius: "10px", opacity: "0.7", padding: "5px"}}>{data.contador}</b></p>
+                            <span className="text-600 text-2xl">Por cada participante en la polla mundialista se incrementa nuestra responsabilidad de sembrar más árboles.</span>
                         </div>
 
                     </div>
