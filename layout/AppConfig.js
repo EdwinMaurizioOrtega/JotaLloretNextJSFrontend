@@ -32,7 +32,7 @@ const AppConfig = () => {
         <>
             <Sidebar style={{width: '16%'}} modal={false} visible={bannerVert()} onHide={onConfigSidebarHide} showCloseIcon={false} position="right" className="layout-config-sidebar">
 
-                <img src={`${contextPath}/layout/images/banner-premios.png`} alt="Sakai Logo" height="600" className="mr-0 lg:mr-2"/>
+                <img src={`${contextPath}/layout/images/banner-premios-dos.png`} alt="Sakai Logo" height="600" className="mr-0 lg:mr-2"/>
 
             </Sidebar>
         </>

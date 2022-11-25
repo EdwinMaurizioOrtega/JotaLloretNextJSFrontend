@@ -252,8 +252,8 @@ const LandingPage = () => {
                     className="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
                     style={{backgroundRepeat: 'no-repeat!important', background: `url(${contextPath}/demo/images/landing/screen-3.png)`, clipPath: 'ellipse(150% 87% at 93% 13%)'}}>
                     <div className="mx-4 md:mx-8 mt-0 md:mt-4">
-                        <h1 style={{color: 'skyblue!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
-                            <span style={{color: 'skyblue!important'}} className="font-light block">Participa</span>
+                        <h1 style={{color: 'black!important'}} className="text-6xl font-bold text-gray-900 line-height-2">
+                            <span style={{color: 'black!important'}} className="font-light block">Participa</span>
                             en dos pasos.
                         </h1>
                         <p className="font-normal text-2xl line-height-3 md:mt-3 text-gray-700" style={{color: 'white!important'}}>Crea tu Polla online GRATIS para el Mundial de fútbol Qatar 2022 </p>
@@ -793,8 +793,8 @@ const LandingPage = () => {
 
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
                                     <h4 className="font-medium text-2xl line-height-3 mb-3 text-900">Comunidad</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">Facebook</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700">
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://www.facebook.com/jotalloretv">Facebook</a>
+                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://instagram.com/jotalloretv?igshid=YmMyMTA2M2Y=">
                                         Instagram
                                         <img src={`${contextPath}/demo/images/landing/new-badge.svg`} className="ml-2"/>
                                     </a>
