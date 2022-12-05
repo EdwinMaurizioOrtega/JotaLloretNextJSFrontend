@@ -30,15 +30,15 @@ const LandingPage = () => {
     // console.log(cedula);
     const [telefono, setTelefono] = useState('');
 
-    const [octavo1, setOctavo1] = useState('');
-    // console.log(octavo1);
-    const [octavo2, setOctavo2] = useState('');
-    const [octavo3, setOctavo3] = useState('');
-    const [octavo4, setOctavo4] = useState('');
-    const [octavo5, setOctavo5] = useState('');
-    const [octavo6, setOctavo6] = useState('');
-    const [octavo7, setOctavo7] = useState('');
-    const [octavo8, setOctavo8] = useState('');
+    // const [octavo1, setOctavo1] = useState('');
+    // // console.log(octavo1);
+    // const [octavo2, setOctavo2] = useState('');
+    // const [octavo3, setOctavo3] = useState('');
+    // const [octavo4, setOctavo4] = useState('');
+    // const [octavo5, setOctavo5] = useState('');
+    // const [octavo6, setOctavo6] = useState('');
+    // const [octavo7, setOctavo7] = useState('');
+    // const [octavo8, setOctavo8] = useState('');
 
     const [cuarto1, setCuarto1] = useState('');
     const [cuarto2, setCuarto2] = useState('');
@@ -58,7 +58,7 @@ const LandingPage = () => {
 
         const fecha = new Date().toLocaleDateString()
         console.log("Terminos y Condiciones: " + checked)
-        if (cedula != "" && telefono != "" && octavo1 != "" && final != "" && checked == true) {
+        if (cedula != "" && telefono != "" && cuarto1 != "" && final != "" && checked == true) {
 
 
             var axios = require('axios');
@@ -66,14 +66,14 @@ const LandingPage = () => {
                 "fechaCreacion": fecha,
                 "cedula": cedula,
                 "telefono": telefono,
-                "octavo1": octavo1,
-                "octavo2": octavo2,
-                "octavo3": octavo3,
-                "octavo4": octavo4,
-                "octavo5": octavo5,
-                "octavo6": octavo6,
-                "octavo7": octavo7,
-                "octavo8": octavo8,
+                // "octavo1": octavo1,
+                // "octavo2": octavo2,
+                // "octavo3": octavo3,
+                // "octavo4": octavo4,
+                // "octavo5": octavo5,
+                // "octavo6": octavo6,
+                // "octavo7": octavo7,
+                // "octavo8": octavo8,
                 "cuarto1": cuarto1,
                 "cuarto2": cuarto2,
                 "cuarto3": cuarto3,
@@ -124,14 +124,14 @@ const LandingPage = () => {
 
             setCedula('')
             setTelefono('')
-            setOctavo1('')
-            setOctavo2('')
-            setOctavo3('')
-            setOctavo4('')
-            setOctavo5('')
-            setOctavo6('')
-            setOctavo7('')
-            setOctavo8('')
+            // setOctavo1('')
+            // setOctavo2('')
+            // setOctavo3('')
+            // setOctavo4('')
+            // setOctavo5('')
+            // setOctavo6('')
+            // setOctavo7('')
+            // setOctavo8('')
 
             setCuarto1('')
             setCuarto2('')
@@ -389,49 +389,49 @@ const LandingPage = () => {
                             <div className="organizational-chart">
 
 
-                                <ul>
-                                    <li>
-                                        <label htmlFor="uno">4to</label>
-                                        <InputText id="uno" style={{width: "100px", height: "20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/>
+                                {/*<ul>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="uno">4to</label>*/}
+                                {/*        <InputText id="uno" style={{width: "100px", height: "20px"}} value={octavo1} onChange={(e) => setOctavo1(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="dos">4to</label>
-                                        <InputText id="dos" style={{width: "100px", height: "20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="dos">4to</label>*/}
+                                {/*        <InputText id="dos" style={{width: "100px", height: "20px"}} value={octavo2} onChange={(e) => setOctavo2(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="tres">4to</label>
-                                        <InputText id="tres" style={{width: "100px", height: "20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="tres">4to</label>*/}
+                                {/*        <InputText id="tres" style={{width: "100px", height: "20px"}} value={octavo3} onChange={(e) => setOctavo3(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="cuatro">4to</label>
-                                        <InputText id="cuatro" style={{width: "100px", height: "20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="cuatro">4to</label>*/}
+                                {/*        <InputText id="cuatro" style={{width: "100px", height: "20px"}} value={octavo4} onChange={(e) => setOctavo4(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="cinco">4to</label>
-                                        <InputText id="cinco" style={{width: "100px", height: "20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="cinco">4to</label>*/}
+                                {/*        <InputText id="cinco" style={{width: "100px", height: "20px"}} value={octavo5} onChange={(e) => setOctavo5(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="seis">4to</label>
-                                        <InputText id="seis" style={{width: "100px", height: "20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="seis">4to</label>*/}
+                                {/*        <InputText id="seis" style={{width: "100px", height: "20px"}} value={octavo6} onChange={(e) => setOctavo6(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="siete">4to</label>
-                                        <InputText id="siete" style={{width: "100px", height: "20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="siete">4to</label>*/}
+                                {/*        <InputText id="siete" style={{width: "100px", height: "20px"}} value={octavo7} onChange={(e) => setOctavo7(e.target.value)}/>*/}
 
-                                    </li>
-                                    <li>
-                                        <label htmlFor="ocho">4to</label>
-                                        <InputText id="ocho" style={{width: "100px", height: "20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/>
+                                {/*    </li>*/}
+                                {/*    <li>*/}
+                                {/*        <label htmlFor="ocho">4to</label>*/}
+                                {/*        <InputText id="ocho" style={{width: "100px", height: "20px"}} value={octavo8} onChange={(e) => setOctavo8(e.target.value)}/>*/}
 
 
-                                    </li>
-                                </ul>
+                                {/*    </li>*/}
+                                {/*</ul>*/}
 
                                 <ul>
                                     <li>
@@ -477,7 +477,7 @@ const LandingPage = () => {
                                     <label htmlFor="binary">Términos y Condiciones</label>
                                 </div>
 
-                                <Button style={{backgroundColor: '#01A0C6!important', borderColor: 'black!important'}} label="Finalizar" onClick={postData}/>
+                                <Button style={{backgroundColor: '#01A0C6!important', borderColor: 'black!important'}} label="FINALIZAR - PARTICIPAR" onClick={postData}/>
 
                             </div>
 
@@ -519,7 +519,7 @@ const LandingPage = () => {
                         <div className="grid justify-content-center" style={{borderRadius: '20px', backgroundColor: '#01A0C6!important'}}>
 
                             <div
-                                className="col-12 mt-8 mb-8 p-2 md:p-8"
+                                className="col-12 mt-8 mb-8 p-2"
                             >
                                 <div className="flex flex-column justify-content-center align-items-center text-center px-3 py-3 md:py-0">
                                     <h3 className="text-gray-900 mb-2" style={{color: 'white!important'}}>Contáctanos</h3>
@@ -527,7 +527,11 @@ const LandingPage = () => {
                                     <p className="text-gray-900 sm:line-height-2 md:line-height-4 text-2xl mt-4" style={{color: 'white!important', maxWidth: '800px'}}>
                                         “Para más información sobre cómo crear tu polla mundialista, contáctanos.”
                                     </p>
-                                    <img src={`${contextPath}/demo/images/landing/logo.png`} width="100" className="mt-4" alt="Company logo"/>
+                                    <img src={`${contextPath}/demo/images/landing/facebook.png`} width="75" className="mt-4" alt="Company logo"/>
+                                    <a className="text-700" style={{color: 'white!important'}}>@lospanasdeljota</a>
+
+                                    <img src={`${contextPath}/demo/images/landing/mail.png`} width="75" className="mt-4" alt="Company logo"/>
+                                    <a className="text-700" style={{color: 'white!important'}}>lospanasdeljota@gmail.com</a>
                                 </div>
 
                             </div>
@@ -542,9 +546,7 @@ const LandingPage = () => {
                         <div className="col-12 md:col-2" style={{marginTop: '-1.5rem'}}>
                             <Link href="/">
                                 <a className="flex flex-wrap align-items-center justify-content-center md:justify-content-start md:mb-0 mb-3 cursor-pointer">
-                                    {/*<img src={`${contextPath}/demo/images/landing/logo.png`} alt="footer sections" height="100" className="mr-2"/>*/}
-                                    <span className="font-medium text-3xl text-900" style={{color: 'white!important', fontSize: '50px!important'}}>el</span>
-                                    <span className="font-medium text-3xl text-900" style={{color: 'white!important', fontSize: '200px!important'}}>J</span>
+                                    <img src={`${contextPath}/demo/images/landing/logo-1.png`} alt="footer sections" height="100" className="mr-2"/>
                                 </a>
                             </Link>
                         </div>
@@ -564,16 +566,58 @@ const LandingPage = () => {
                                     <a className="line-height-3 text-xl block cursor-pointer text-700" style={{color: 'white!important'}}>Términos de servicio</a>
                                 </div>
 
+
                                 <div className="col-12 md:col-3 mt-4 md:mt-0">
-                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900" style={{color: 'white!important'}}>Comunidad</h4>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://www.facebook.com/jotalloretv" style={{color: 'white!important'}}>Facebook</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://instagram.com/jotalloretv?igshid=YmMyMTA2M2Y=" style={{color: 'white!important'}}>
-                                        Instagram
-                                        <img src={`${contextPath}/demo/images/landing/new-badge.svg`} className="ml-2"/>
-                                    </a>
-                                    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" style={{color: 'white!important'}}>Twitter</a>
-                                    <a className="line-height-3 text-xl block cursor-pointer text-700" style={{color: 'white!important'}}>WhatsApp</a>
+
+
+                                    <h4 className="font-medium text-2xl line-height-3 mb-3 text-900" style={{color: 'white!important'}}>Comunidad </h4>
+
+
+                                    <div className="field col-12 md:col-1">
+
+                                        <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://www.facebook.com/jotalloretv">
+                                            <img src={`${contextPath}/demo/images/landing/facebook.png`} alt="footer sections" height="30" className="mr-2"/>
+                                        </a>
+
+
+                                        <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://instagram.com/jotalloretv?igshid=YmMyMTA2M2Y=">
+                                            <img src={`${contextPath}/demo/images/landing/instagram.png`} alt="footer sections" height="30" className="mr-2"/>
+                                        </a>
+
+
+                                        <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://twitter.com/jotalloretv">
+                                            <img src={`${contextPath}/demo/images/landing/twitter.png`} alt="footer sections" height="30" className="mr-2"/>
+                                        </a>
+
+
+                                        <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="#">
+                                            <img src={`${contextPath}/demo/images/landing/waspp.png`} alt="footer sections" height="30" className="mr-2"/>
+                                        </a>
+
+
+                                    </div>
+
+
                                 </div>
+
+                                {/*<div className="col-12 md:col-3 mt-4 md:mt-0">*/}
+                                {/*    */}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://www.facebook.com/jotalloretv" style={{color: 'white!important'}}>*/}
+                                {/*        <img src={`${contextPath}/demo/images/landing/logo-1.png`} alt="footer sections" height="100" className="mr-2"/>*/}
+
+                                {/*    </a>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" href="https://instagram.com/jotalloretv?igshid=YmMyMTA2M2Y=" style={{color: 'white!important'}}>*/}
+                                {/*        <img src={`${contextPath}/demo/images/landing/logo-1.png`} alt="footer sections" height="100" className="mr-2"/>*/}
+                                {/*    </a>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer mb-2 text-700" style={{color: 'white!important'}}>*/}
+                                {/*        <img src={`${contextPath}/demo/images/landing/logo-1.png`} alt="footer sections" height="100" className="mr-2"/>*/}
+
+                                {/*    </a>*/}
+                                {/*    <a className="line-height-3 text-xl block cursor-pointer text-700" style={{color: 'white!important'}}>*/}
+                                {/*        <img src={`${contextPath}/demo/images/landing/logo-1.png`} alt="footer sections" height="100" className="mr-2"/>*/}
+
+                                {/*    </a>*/}
+                                {/*</div>*/}
 
                             </div>
                         </div>
